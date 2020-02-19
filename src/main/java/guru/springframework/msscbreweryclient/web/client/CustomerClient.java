@@ -6,7 +6,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
 import java.net.URI;
 import java.util.UUID;
 
@@ -35,17 +34,11 @@ public class CustomerClient {
     }
 
     public void updateCustomer(UUID uuid, CustomerDto customerDto) {
-        restTemplate.put(apihost + CUSTOMER_PATH_V1 + "/" + uuid.toString(), customerDto);
+        restTemplate.put(apihost + CUSTOMER_PATH_V1 + uuid.toString(), customerDto);
     }
 
 
     public void deleteCustomer(UUID uuid) {
-        restTemplate.delete(apihost + CUSTOMER_PATH_V1 + "/" + uuid);
-
+        restTemplate.delete(apihost + CUSTOMER_PATH_V1 + uuid);
     }
-
-
-
-
-
 }
