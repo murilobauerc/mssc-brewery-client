@@ -1,0 +1,16 @@
+logging:
+  level:
+    org:
+      apache:
+        http: debug
+server:
+  port: 9092
+sfg:
+  brewery:
+    apihost: http://localhost:9091
+  connectionrequesttimeout: 3000
+  customer:
+    apihost: http://localhost:9091
+  defaultmaxperroute: 100
+  maxtotalconnections: 100
+  sockettimeout: 3000

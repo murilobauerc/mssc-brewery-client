@@ -18,21 +18,25 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class BlockingRestTemplateCustomizer implements RestTemplateCustomizer {
 
-    @Value("${sfg.maxtotalconnections}")
-    private Integer maxTotalConnections;
-    @Value("${sfg.defaultMaxTotalConnections}")
-    private Integer defaultMaxTotalConnections;
-    @Value("${sfg.connectionRequestTimeout}")
-    private Integer connectionRequestTimeout;
-    @Value("${sfg.socketTimeout}")
-    private Integer socketTimeout;
+    private final Integer maxTotalConnections;
+    private final Integer defaultMaxTotalConnetions;
+    private final Integer connectionRequestTimeout;
+    private final Integer socketTimeout;
 
-    public BlockingRestTemplateCustomizer(){ }
+    public BlockingRestTemplateCustomizer(@Value("${sfg.maxtotalconnections}") Integer maxTotalConnections,
+                                          @Value("${sfg.defaultmaxtotalconnections}") Integer defaultMaxTotalConnetions,
+                                          @Value("${sfg.connectionrequesttimeout}")Integer connectionRequestTimeout,
+                                          @Value("${sfg.sockettimeout}")Integer socketTimeout) {
+        this.maxTotalConnections = maxTotalConnections;
+        this.defaultMaxTotalConnetions = defaultMaxTotalConnetions;
+        this.connectionRequestTimeout = connectionRequestTimeout;
+        this.socketTimeout = socketTimeout;
+    }
 
     public ClientHttpRequestFactory clientHttpRequestFactory(){
         PoolingHttpClientConnectionManager connectionManager = new PoolingHttpClientConnectionManager();
         connectionManager.setMaxTotal(maxTotalConnections);
-        connectionManager.setDefaultMaxPerRoute(defaultMaxTotalConnections);
+        connectionManager.setDefaultMaxPerRoute(defaultMaxTotalConnetions);
 
         RequestConfig requestConfig = RequestConfig
                 .custom()
